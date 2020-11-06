@@ -29,3 +29,8 @@ bool operator== (const String& left, const String& right) {
 bool operator!= (const String& left, const String& right) {
     return !(left == right); // используем перегруженный оператор == и инвертируем его значение
 }
+
+bool operator< (const String& left, const String& right) {
+    // strcmp принимает аргументы типа const char*, и у класса String как раз есть оператор преобразование в этот тип
+    return std::strcmp(left, right) < 0; // strcmp вернет отрицательное число, если левая строка меньше правой
+}

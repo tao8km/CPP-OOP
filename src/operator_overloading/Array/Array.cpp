@@ -12,8 +12,9 @@ std::ostream& operator<<(std::ostream& os, const Array& array) {
         os << array[i] << ", ";
     }
 
-    os << array[i] << ']';
+    if (array.size() > 0)
+        os << array[i];
 
-    return os;
+    return os << ']';
 }
 

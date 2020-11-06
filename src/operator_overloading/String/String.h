@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <cstring> // std::strlen, std::strncpy, std::strncat
+#include <cstring> // std::strlen, std::strncpy, std::strncat, std::strcmp
 
 class String
 {
@@ -84,7 +84,7 @@ public:
     // дружественные функции
     friend std::ostream& operator<< (std::ostream& os, const String& str);
 
-    // оператор приведения из String к типу const char *
+    // оператор преобразования из String к типу const char *
     operator const char* () const {
         return ptr;
     }
@@ -118,4 +118,5 @@ private:
 String operator+(String left, const String& right);
 bool operator== (const String& left, const String& right);
 bool operator!= (const String& left, const String& right);
+bool operator< (const String& left, const String& right);
 

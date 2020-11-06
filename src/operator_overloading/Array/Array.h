@@ -1,5 +1,7 @@
 #pragma once
+
 #include <iostream>
+#include <initializer_list>
 
 
 class Array
@@ -14,6 +16,22 @@ public:
         : capacity {capacity}
     {
         elements = new int[capacity];
+    }
+
+    Array(const int* elements, int count) : count {count}, capacity {count}, elements {new int[capacity]}
+    {
+        for (int i = 0; i < count; i++) {
+            this->elements[i] = elements[i];
+        }
+    }
+
+    // initializer_list (библиотечный класс) - список инициализаторов. Например - Array a({1, 2, 3, 4, 5});
+    Array(std::initializer_list<int> list) : count (list.size()), capacity {count}, elements {new int[capacity]}
+    {
+        int i = 0;
+        for (int elem : list) {
+            elements[i++] = elem;
+        }
     }
 
     // копирующий конструктор
