@@ -47,9 +47,9 @@ void PhoneBook::addAbonent(const Abonent& abonent) {
 void PhoneBook::resize(int newSize) {
     Abonent** memory = new Abonent* [newSize];
     for (int i = 0; i < numberOfAbonents; i++)
-        memory[i] = abonents[i]; // вызывается оператор присваивание Абонента
+        memory[i] = abonents[i]; // копирую указатели на абонентов
     memoryCapacity = newSize;
-    delete[] abonents;
+    delete[] abonents; // удаляется только старый массив, но не объекты абонентов
     abonents = memory;
 }
 
