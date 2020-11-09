@@ -6,10 +6,32 @@ PhoneBook::PhoneBook(int size)
 {
 }
 
+PhoneBook::PhoneBook(const PhoneBook& other)
+    : abonents {new Abonent* [other.memoryCapacity]}, memoryCapacity {other.memoryCapacity},
+    numberOfAbonents {other.numberOfAbonents}
+{
+    // помимо выделения памяти для массива, нужно еще создать объекты класса Абонент
+    for (int i = 0; i < numberOfAbonents; i++)
+        abonents[i] = new Abonent(*other.abonents[i]); // вызов конструктора копирования. Приоритет оператора . выше оператора разыменования *
+}
+
 PhoneBook::~PhoneBook() {
     for (int i = 0; i < numberOfAbonents; i++)
         delete abonents[i]; // удаляю абонентов (объекты)
     delete[] abonents; // удаляю память из под массива указателей на абонентов
+}
+
+PhoneBook& PhoneBook::operator= (const PhoneBook& other) {
+    if (this != &other) {
+        this->~PhoneBook(); // вызвал деструктор для освобождения памяти из под абонентов и массива
+        memoryCapacity = other.memoryCapacity;
+        numberOfAbonents = other.numberOfAbonents;
+        abonents = new Abonent* [memoryCapacity];
+        for (int i = 0; i < numberOfAbonents; i++)
+            abonents[i] = new Abonent(*other.abonents[i]);
+    }
+
+    return *this;
 }
 
 void PhoneBook::addAbonent(const Abonent& abonent) {

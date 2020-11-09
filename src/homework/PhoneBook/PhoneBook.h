@@ -10,7 +10,10 @@ class PhoneBook
 
 public:
     PhoneBook(int size = 10);
+    PhoneBook(const PhoneBook& other);
     ~PhoneBook();
+
+    PhoneBook& operator= (const PhoneBook& other);
 
     void addAbonent(const Abonent& abonent);
 
