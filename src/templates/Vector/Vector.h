@@ -119,7 +119,7 @@ private:
 
 template<typename T>
 Vector<T>::Vector(Vector<T>&& other) {
-    *this = other; // использую оператор перемещающего присваивания
+    *this = std::move(other); // использую оператор перемещающего присваивания
 
     std::cout << "Vector(Vector&&)\n";
 }

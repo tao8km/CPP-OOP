@@ -10,4 +10,8 @@ int main()
     }
 
     std::cout << a << std::endl;
+
+    Vector<int> b = a;
+    Vector<int> c = std::move(b);
+    b = std::move(c);
 }
