@@ -1,12 +1,12 @@
-#ifndef ARRAY_H_
-#define ARRAY_H_
+#ifndef VECTOR_H_
+#define VECTOR_H_
 
 #include <iostream>
 #include <initializer_list>
 
 
 template<typename T>
-class Array
+class Vector
 {
     int count = 0; // количество элементов (сколько элементов уже помещено)
     int capacity = 0; // объем выделенной памяти (сколько можно поместить элементов)
@@ -14,21 +14,21 @@ class Array
 
 public:
 
-    Array(int capacity = 10)
+    Vector(int capacity = 10)
         : capacity {capacity}
     {
         elements = new T[capacity];
     }
 
-    Array(const T* elements, int count) : count {count}, capacity {count}, elements {new T[capacity]}
+    Vector(const T* elements, int count) : count {count}, capacity {count}, elements {new T[capacity]}
     {
         for (int i = 0; i < count; i++) {
             this->elements[i] = elements[i];
         }
     }
 
-    // initializer_list (библиотечный класс) - список инициализаторов. Например - Array a({1, 2, 3, 4, 5});
-    Array(std::initializer_list<T> list) : capacity {list.size()}, elements {new T[capacity]}
+    // initializer_list (библиотечный класс) - список инициализаторов. Например - Vector a({1, 2, 3, 4, 5});
+    Vector(std::initializer_list<T> list) : capacity {list.size()}, elements {new T[capacity]}
     {
         for (const auto& elem : list) {
             elements[size++] = elem;
@@ -36,7 +36,7 @@ public:
     }
 
     // копирующий конструктор
-    Array(const Array& other)
+    Vector(const Vector& other)
         : count {other.count}, capacity {other.capacity}
     {
         elements = new T[capacity];
@@ -46,14 +46,14 @@ public:
     }
 
     // заголовок перемещающего конструктора
-    Array(Array&& other);
+    Vector(Vector&& other);
 
-    ~Array() {
+    ~Vector() {
         delete[] elements;
     }
 
     // оператор присваивания
-    Array& operator=(const Array& other) {
+    Vector& operator=(const Vector& other) {
         if (this != &other) { // проверяем, что не происходит присваивания объекта самому себе
             if (capacity < other.capacity) { // если нужно, то выделяем больше памяти
                 increaseMemory(other.capacity);
@@ -69,7 +69,7 @@ public:
     }
 
     // заголовок оператора перемещающего присваивания
-    Array& operator= (Array&& other);
+    Vector& operator= (Vector&& other);
 
     // оператор индексирования
     T& operator[] (int index) {
@@ -118,14 +118,14 @@ private:
 
 
 template<typename T>
-Array<T>::Array(Array<T>&& other) {
+Vector<T>::Vector(Vector<T>&& other) {
     *this = other; // использую оператор перемещающего присваивания
 
-    std::cout << "Array(Array&&)\n";
+    std::cout << "Vector(Vector&&)\n";
 }
 
 template<typename T>
-Array<T>& Array<T>::operator= (Array<T>&& other) {
+Vector<T>& Vector<T>::operator= (Vector<T>&& other) {
     if (this != &other) {
         count = other.count;
         capacity = other.capacity;
@@ -135,28 +135,28 @@ Array<T>& Array<T>::operator= (Array<T>&& other) {
         other.elements = nullptr;
     }
 
-    std::cout << "operator= (Array&&)\n";
+    std::cout << "operator= (Vector&&)\n";
 
     return *this;
 }
 
 /**
- * Свободная функция (не метод класса Array), перегружающая оператор << для Array
- * Выводит элементы Array в поток os.
+ * Свободная функция (не метод класса Vector), перегружающая оператор << для Vector
+ * Выводит элементы Vector в поток os.
  */
 template<typename T>
-std::ostream& operator<<(std::ostream& os, const Array<T>& array) {
+std::ostream& operator<<(std::ostream& os, const Vector<T>& vector) {
     os << '[';
 
     int i;
-    for (i = 0; i < array.size() - 1; i++) {
-        os << array[i] << ", ";
+    for (i = 0; i < vector.size() - 1; i++) {
+        os << vector[i] << ", ";
     }
 
-    if (array.size() > 0)
-        os << array[i];
+    if (vector.size() > 0)
+        os << vector[i];
 
     return os << ']';
 }
 
-#endif // ARRAY_H_
+#endif // VECTOR_H_
