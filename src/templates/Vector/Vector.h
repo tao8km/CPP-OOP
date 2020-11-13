@@ -28,10 +28,10 @@ public:
     }
 
     // initializer_list (библиотечный класс) - список инициализаторов. Например - Vector a({1, 2, 3, 4, 5});
-    Vector(std::initializer_list<T> list) : capacity {list.size()}, elements {new T[capacity]}
+    Vector(std::initializer_list<T> list) : capacity {(int)list.size()}, elements {new T[capacity]}
     {
         for (const auto& elem : list) {
-            elements[size++] = elem;
+            elements[count++] = elem;
         }
     }
 
@@ -90,6 +90,11 @@ public:
         elements[count] = elem;
         ++count;
     }
+
+    T* begin() { return elements; }
+    T* end() { return elements + count; }
+    const T* cbegin() const { return elements; }
+    const T* cend() const { return elements + count; }
 
     int size() const { return count; }
 

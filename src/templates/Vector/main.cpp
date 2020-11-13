@@ -14,4 +14,8 @@ int main()
     Vector<int> b = a;
     Vector<int> c = std::move(b);
     b = std::move(c);
+
+    Vector<int*> d {new int(1), new int(2), new int(3)};
+    for (const auto& elem : d)
+        delete elem;
 }

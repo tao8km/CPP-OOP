@@ -26,11 +26,10 @@ public:
     }
 
     // initializer_list (библиотечный класс) - список инициализаторов. Например - Array a({1, 2, 3, 4, 5});
-    Array(std::initializer_list<int> list) : count (list.size()), capacity {count}, elements {new int[capacity]}
+    Array(std::initializer_list<int> list) : capacity {count}, elements {new int[capacity]}
     {
-        int i = 0;
         for (int elem : list) {
-            elements[i++] = elem;
+            elements[count++] = elem;
         }
     }
 
