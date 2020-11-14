@@ -1,5 +1,5 @@
-#ifndef STACK_H_
-#define STACK_H_
+#ifndef QUEUE_H_
+#define QUEUE_H_
 
 #include <stdexcept> // domain_error
 #include <utility> // swap
@@ -7,24 +7,25 @@
 
 
 template<typename T>
-class Stack
+class Queue
 {
     List<T> elems;
 
 public:
-    void push(T value) {
+    // поместить в очередь
+    void enqueue(T value) {
         elems.insert(elems.end(), value);
     }
 
-    T pop() {
+    // извлечь из очереди
+    T dequeue() {
         if (elems.size() == 0) {
-            throw std::domain_error("Stack is empty!");
+            throw std::domain_error("Queue is empty!");
         }
 
-        auto top = elems.end();
-        --top;
-        T value = *top;
-        elems.remove(top);
+        auto head = elems.begin();
+        T value = *head;
+        elems.remove(head);
 
         return value;
     }
@@ -34,4 +35,4 @@ public:
 };
 
 
-#endif /* STACK_H_ */
+#endif /* QUEUE_H_ */
