@@ -9,7 +9,7 @@ House::House(const House& other)
     : House(other.numberOfFlats)
 {
     for (int i = 0; i < numberOfFlats; i++)
-        flats[i] = other.flats[i]; // работает конструктор копирования
+        flats[i] = other.flats[i]; // работает оператор присваивания
 }
 
 House::~House() {
