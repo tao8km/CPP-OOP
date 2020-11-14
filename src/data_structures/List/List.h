@@ -19,6 +19,7 @@ public:
     using const_iterator = const Iterator;
     using value_type = T;
 
+    List();
     List(std::initializer_list<T> values);
     List(const List& other);
     List(List&& other);

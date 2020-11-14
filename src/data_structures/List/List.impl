@@ -2,6 +2,12 @@
 #include <utility> // swap
 
 template<typename T>
+List<T>::List()
+{
+    head = tail = new Node {0, nullptr, nullptr};
+}
+
+template<typename T>
 List<T>::List(std::initializer_list<T> values)
 {
     Node** current = &head;
@@ -21,6 +27,8 @@ List<T>::List(std::initializer_list<T> values)
     if (tail != nullptr)
         tail->next = last;
     tail = last;
+    if (head == nullptr)
+        head = tail;
 }
 
 template<typename T>
