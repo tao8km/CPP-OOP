@@ -165,6 +165,19 @@ void List<T>::remove(iterator& it)
 }
 
 template<typename T>
+auto List<T>::find(T value) const -> iterator
+{
+    auto it = begin();
+    while (it != end()) {
+        if (*it == value)
+            return it;
+        ++it;
+    }
+
+    return it;
+}
+
+template<typename T>
 std::ostream& operator<< (std::ostream& os, const List<T>& list)
 {
     for (const auto& elem : list) {

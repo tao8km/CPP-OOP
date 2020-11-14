@@ -18,6 +18,14 @@ int main()
     list.remove(it);
     cout << list << endl;
 
+    it = list.find(4); // in list
+    if (it != list.end())
+        cout << "found " << *it << endl;
+
+    it = list.find(444); // not in list
+    if (it != list.end())
+        cout << "found " << *it << endl;
+
     it = list.begin();
     list.remove(it);
     cout << list << endl;

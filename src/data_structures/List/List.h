@@ -32,6 +32,7 @@ public:
     void insert(const_iterator it, T value);
     void insert(const_iterator begin, const_iterator end);
     void remove(iterator& it);
+    iterator find(T value) const;
 
     iterator begin() { return iterator(this, head); }
     iterator end() { return iterator(this, tail); }
