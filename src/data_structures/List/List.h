@@ -102,7 +102,7 @@ private:
 }; // class List<T>
 
 
-#include "List.impl" // include implementation of template functions and methods
+#include "List_impl.h" // include implementation of template functions and methods
 
 
 #endif /* LIST_H_ */
