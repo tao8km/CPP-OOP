@@ -25,6 +25,6 @@ int main()
     cin >> replace;
 
     auto it = ints.find(n);
-    (*it)->value = replace;
+    it->value = replace;
     ints.printInOrder(cout);
 }

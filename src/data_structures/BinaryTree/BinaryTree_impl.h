@@ -1,25 +1,36 @@
 template<typename T>
 typename BinaryTree<T>::iterator BinaryTree<T>::insert(const T& value)
 {
-    iterator pos = find(value);
-    if (*pos == nullptr) {
-        *pos = new Node {value};
+    iterator current = find(value);
+    if (*current.pos == nullptr) {
+        *current.pos = new Node {value};
         ++count;
     }
 
-    return pos;
+    return current;
+}
+
+template<typename T>
+typename BinaryTree<T>::iterator BinaryTree<T>::remove(const T& value)
+{
+    iterator current = find(value);
+    if (*current.pos != nullptr) {
+        // TODO
+    }
+
+    return current;
 }
 
 template<typename T>
 typename BinaryTree<T>::iterator BinaryTree<T>::find(const T& value)
 {
-    iterator current = &root;
+    iterator current = begin();
 
-    while (*current != nullptr) {
-        if (value < (*current)->value)
-            current = &(*current)->left;
-        else if (value > (*current)->value)
-            current = &(*current)->right;
+    while (*current.pos != nullptr) {
+        if (value < current->value)
+            current.pos = &current->left;
+        else if (value > current->value)
+            current.pos = &current->right;
         else
             break; // found value
     }

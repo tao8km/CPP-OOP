@@ -7,12 +7,14 @@ template<typename T>
 class BinaryTree
 {
     struct Node;
+    struct Iterator;
 
     Node* root = nullptr;
     int count = 0;
 
 public:
-    using iterator = Node**;
+    using iterator = Iterator;
+    using const_iterator = const iterator;
     // void insert(const_iterator pos, T value);
 
     ~BinaryTree() {
@@ -29,7 +31,11 @@ public:
     }
 
     iterator insert(const T& value);
+    iterator remove(const T& value);
     iterator find(const T& value);
+
+    iterator begin() { return iterator { this, &root }; }
+    iterator end() { return iterator { this, nullptr }; }
 
     void printInOrder(std::ostream& os, const typename BinaryTree<T>::Node* node) {
         if (node != nullptr) {
@@ -48,8 +54,18 @@ private:
     struct Node
     {
         T value;
+        Node* parent = nullptr;
         Node* left = nullptr;
         Node* right = nullptr;
+    };
+
+    struct Iterator
+    {
+        BinaryTree* tree = nullptr;
+        Node** pos = nullptr;
+
+        T& operator* () { return (*pos)->value; }
+        Node* operator->() { return *pos; }
     };
 };
 
