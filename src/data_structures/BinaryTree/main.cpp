@@ -20,11 +20,23 @@ int main()
     int n;
     cout << "Enter number to search in tree: ";
     cin >> n;
-    int replace;
-    cout << "Enter replacement: ";
-    cin >> replace;
 
     auto it = ints.find(n);
-    it->value = replace;
-    ints.printInOrder(cout);
+    if (it != ints.end()) {
+        int replace;
+        cout << "Enter replacement: ";
+        cin >> replace;
+        it->value = replace;
+        ints.printInOrder(cout);
+    } else {
+        cout << n << " not found in tree.\n";
+    }
+
+    cout << "Enter number to remove from tree: ";
+    cin >> n;
+    it = ints.remove(n);
+    if (it != ints.end())
+        ints.printInOrder(cout);
+    else
+        cout << n << " not found in tree.\n";
 }

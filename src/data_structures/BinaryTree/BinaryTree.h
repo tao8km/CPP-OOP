@@ -50,6 +50,16 @@ public:
         os << '\n';
     }
 
+    friend bool operator== (const_iterator &left, const_iterator& right) {
+        Node* leftPos = left.pos == nullptr ? nullptr : *left.pos;
+        Node* rightPos = right.pos == nullptr ? nullptr : *right.pos;
+        return left.tree == right.tree && leftPos == rightPos;
+    }
+
+    friend bool operator!= (const_iterator &left, const_iterator& right) {
+        return !(left == right);
+    }
+
 private:
     struct Node
     {
@@ -67,6 +77,8 @@ private:
         T& operator* () { return (*pos)->value; }
         Node* operator->() { return *pos; }
     };
+
+    Node* getMin(Node* root);
 };
 
 #include "BinaryTree_impl.h"
