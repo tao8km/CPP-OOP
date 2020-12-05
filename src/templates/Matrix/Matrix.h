@@ -5,21 +5,20 @@
 #include <initializer_list>
 
 
-template<typename T>
+template<typename T, int Rows, int Cols>
 class Matrix
 {
-    int nrows = 0;
-    int ncols = 0;
     T** elements = nullptr;
 public:
-    Matrix(int nrows, int ncols);
+    Matrix();
     Matrix(std::initializer_list<std::initializer_list<T>> list);
     Matrix(const Matrix& other);
     Matrix(Matrix&& other);
     ~Matrix() {
-        if (elements)
+        if (elements) {
             delete[] elements[0];
-        delete[] elements;
+            delete[] elements;
+        }
     }
 
     Matrix& operator= (Matrix other);
@@ -28,13 +27,13 @@ public:
     T* operator[](int row) { return elements[row]; }
     const T* operator[](int row) const { return elements[row]; }
 
-    int rows() const { return nrows; }
-    int cols() const { return ncols; }
+    int rows() const { return Rows; }
+    int cols() const { return Cols; }
 
-    template<typename K>
-    friend void swap(Matrix<K>& a, Matrix<K>& b);
+    template<typename K, int KRows, int KCols>
+    friend void swap(Matrix<K, KRows, KCols>& a, Matrix<K, KRows, KCols>& b);
 };
 
-#include "Matrix.impl"
+#include "Matrix_impl.h"
 
 #endif /* MATRIX_H_ */

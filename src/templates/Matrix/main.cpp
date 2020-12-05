@@ -2,25 +2,25 @@
 #include "Matrix.h"
 using namespace std;
 
-template<typename T>
-Matrix<T> get() {
-    return Matrix<T>(3, 4);
+template<typename T, int R, int C>
+Matrix<T, R, C> get() {
+    return Matrix<T, R, C>();
 }
 
 int main()
 {
-    Matrix<int> a = {
+    Matrix<int, 2, 3> a = {
         {1, 2, 1},
         {0, 1, 2}
     };
 
-    Matrix<int> b = {
+    Matrix<int, 3, 2> b = {
         {1, 0},
         {0, 1},
         {1, 1}
     };
 
-    Matrix<int> c = {
+    Matrix<int, 2, 3> c = {
         {3, 4, 5},
         {6, 7, 8}
     };
@@ -32,7 +32,7 @@ int main()
     cout << "A * B\n" << a * b << endl;
 
     cout << "copy constructor in action:\n";
-    Matrix<int> d = b;
+    Matrix d = c;
     cout << "D\n" << d << endl;
 
     cout <<  "copy assignment in action:\n";
@@ -40,5 +40,5 @@ int main()
     cout << "D\n" << d << endl;
 
     cout << "move constructor or RVO (copy elision) in action:\n";
-    cout << get<int>() << endl;
+    cout << get<int, 3, 4>() << endl;
 }
