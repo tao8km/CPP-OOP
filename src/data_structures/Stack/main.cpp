@@ -3,11 +3,23 @@
 
 int main()
 {
-    Stack<double> stack;
+    Stack<double> a;
     for (int i = 0; i < 10; i++)
-        stack.push(i);
+        a.push(i);
 
-    while (!stack.empty())
-        std::cout << ' ' << stack.pop();
+    Stack<double> b;
+    for (int i = -10; i < 5; i++)
+        b.push(i);
+
+    auto addition = a + b;
+    std::cout << "a + b = ";
+    while (!addition.empty())
+        std::cout << ' ' << addition.pop();
+    std::cout << std::endl;
+
+    auto multiplication = a * b;
+    std::cout << "a * b = ";
+    while (!multiplication.empty())
+        std::cout << ' ' << multiplication.pop();
     std::cout << std::endl;
 }

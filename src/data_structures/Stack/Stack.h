@@ -1,29 +1,30 @@
 #ifndef STACK_H_
 #define STACK_H_
 
-#include <stdexcept> // domain_error
-#include <utility> // swap
+#include <stdexcept> // underflow_error
 #include "List.h"
 
 
-template<typename T>
+template<typename E>
 class Stack
 {
-    List<T> elems;
+    List<E> elems;
 
 public:
-    void push(T value) {
+    Stack<E> operator+= (const Stack<E>& other);
+
+    void push(E value) {
         elems.insert(elems.end(), value);
     }
 
-    T pop() {
+    E pop() {
         if (elems.size() == 0) {
-            throw std::domain_error("Stack is empty!");
+            throw std::underflow_error("Stack is empty!");
         }
 
         auto top = elems.end();
         --top;
-        T value = *top;
+        E value = *top;
         elems.remove(top);
 
         return value;
@@ -31,7 +32,12 @@ public:
 
     int size() const { return elems.size(); }
     bool empty() const { return elems.empty(); }
+
+    template<typename T>
+    friend Stack<T> operator* (const Stack<T>& lhs, const Stack<T>& rhs);
 };
+
+#include "Stack_impl.h"
 
 
 #endif /* STACK_H_ */
