@@ -1,7 +1,5 @@
-#include "Matrix.h"
 #include <algorithm> // swap
 #include <iostream>
-#include <stdexcept> // domain_error
 
 template<typename T, int Rows, int Cols>
 Matrix<T, Rows, Cols>::Matrix()
